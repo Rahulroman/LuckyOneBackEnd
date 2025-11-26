@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LuckyOne.DTOs.RequestDtos;
+using LuckyOne.Services.IServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace LuckyOne.Controllers
 {
@@ -8,21 +12,28 @@ namespace LuckyOne.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        [HttpGet]
-        [Route("login")]
-        public async Task<IActionResult> login()
+        private readonly IAuthService _authService;
+       public AuthController(IAuthService authService)
         {
-            var result = "data test";
-            return  Ok(result);
+            _authService = authService;
         }
 
+
+
+       
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> register() 
+        public async Task<IActionResult> register(RegisterRequestDto user) 
         {
-            var result = "register called";
-
-            return Ok( result);
+            try
+            {
+                var response = await _authService.register(user);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

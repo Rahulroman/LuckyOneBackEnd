@@ -1,9 +1,10 @@
 ﻿using LuckyOne.DTOs.RequestDtos;
+using System.Threading.Tasks;
 
 namespace LuckyOne.Services.IServices
 {
     public interface IAuthService
     {
-        Task<RegisterRequestDto> RegisterAsync(RegisterRequestDto dto);
+        Task<object> register(RegisterRequestDto request);
     }
 }

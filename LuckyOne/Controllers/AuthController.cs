@@ -1,4 +1,6 @@
 ﻿using LuckyOne.DTOs.RequestDtos;
+using LuckyOne.Entity;
+using LuckyOne.Helper;
 using LuckyOne.Services.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
@@ -23,17 +25,37 @@ namespace LuckyOne.Controllers
        
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> register(RegisterRequestDto user) 
+        public async Task<IActionResult> register(RegisterRequestDto request) 
         {
             try
             {
-                var response = await _authService.register(user);
-                return Ok(response);
+                var response = await _authService.register(request);
+                return Ok( new { Status = true, response = response });
+            }
+            catch (Exception ex)
+            { 
+                return BadRequest(new { Status = false, Response = ex.Message });
+            }
+        }
+
+        [HttpPost, Route("login")]
+        public async Task<IActionResult> Login(LoginRequestDto request) 
+        {
+            try
+            {
+                var result = await _authService.Login(request);
+
+                return Ok(new { Status = true , Response = "Login Success" , Token = result });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new { Status = false, Response = ex.Message });
             }
         }
+
+
+
+
+
     }
 }

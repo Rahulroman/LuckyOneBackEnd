@@ -2,6 +2,8 @@
 using LuckyOne.DTOs.RequestDtos;
 using LuckyOne.Entity;
 using LuckyOne.Repositories.IRepository;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LuckyOne.Repositories
@@ -31,6 +33,17 @@ namespace LuckyOne.Repositories
             {
                 Message = "Resiter Success"
             };
+        }
+
+        public async Task<object> Login(LoginRequestDto request) 
+        {
+            User result  = await _context.Users.Where(x => x.Username == request.Username
+                                                && x.PasswordHash == request.Password)
+                                                .Select(x => x).FirstOrDefaultAsync();
+
+
+            return result;
+
         }
     }
 }

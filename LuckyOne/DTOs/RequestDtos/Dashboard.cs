@@ -2,5 +2,6 @@
 {
     public class Dashboard
     {
+        public int TotalUsers { get; set; }
     }
 }

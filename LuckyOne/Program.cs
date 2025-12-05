@@ -28,11 +28,15 @@ builder.Services.AddSwaggerGen();
 
 // services
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IContestService, ContestService>();
+//builder.Services.AddScoped<IResultService, ResultService>();
+//builder.Services.AddScoped<IWalletService, WalletService>();
 
 
 
 //repository
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IContestRepository, ContestRepository>();
 builder.Services.AddScoped<JwtHelper>();
 
 

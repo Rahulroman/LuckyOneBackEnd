@@ -23,24 +23,24 @@ namespace LuckyOne.Services
             return await _contestRepository.CreateContestAsync(dto);
         }
 
-        public Task<List<ContestListItemDto>> GetAllContestsAsync()
+        public async Task<List<ContestListItemDto>> GetAllContestsAsync()
         {
-            return _contestRepository.GetAllContestsAsync();
+            return await _contestRepository.GetAllContestsAsync();
         }
 
-        public Task<ContestDetailDto> GetContestDetailAsync(int contestId, int? userId)
+        public async Task<ContestDetailDto> GetContestDetailAsync(int contestId, int? userId)
         {
-            return _contestRepository.GetContestDetailAsync(contestId, userId);
+            return await _contestRepository.GetContestDetailAsync(contestId, userId);
         }
 
-        public Task<List<ContestListItemDto>> GetOpenContestsAsync(int? userId)
+        public async Task<List<ContestListItemDto>> GetOpenContestsAsync(int? userId)
         {
-            return _contestRepository.GetOpenContestsAsync(userId);
+            return await _contestRepository.GetOpenContestsAsync(userId);
         }
 
-        public Task<bool> JoinContestAsync(int contestId, int userId)
+        public async Task<bool> JoinContestAsync(int contestId, int userId)
         {
-            return _contestRepository.JoinContestAsync(contestId, userId);
+            return await _contestRepository.JoinContestAsync(contestId, userId);
         }
     }
 }

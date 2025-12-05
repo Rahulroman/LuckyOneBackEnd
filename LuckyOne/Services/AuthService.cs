@@ -28,18 +28,18 @@ namespace LuckyOne.Services
 
         public async Task<object> Login(LoginRequestDto request)
         {
-            User result = (User)await _authRepository.Login(request);
+            var result = await _authRepository.Login(request);
 
             if (result == null)
             {
-                return new { Message = "Invalid username or password" };
+                return null;
             }
 
-            string username = result.Username;
+            //string username = result.Username;
 
-            var token = _jwtHelper.GenerateToken(result.Username, result.IsAdmin);
+            var token = _jwtHelper.GenerateToken(result, false);
 
-            return new { Token = token, Username = username };
+            return new { Token = token, Username = result };
         }
 
 

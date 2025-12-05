@@ -8,6 +8,6 @@ namespace LuckyOne.Repositories.IRepository
     public interface IAuthRepository
     {
         Task<object> Reister(RegisterRequestDto user);
-        Task<object> Login(LoginRequestDto user);          
+        Task<string> Login(LoginRequestDto user);          
     }
 }

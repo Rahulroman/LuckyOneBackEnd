@@ -45,7 +45,16 @@ namespace LuckyOne.Controllers
             {
                 var result = await _authService.Login(request);
 
-                return Ok(new { Status = true , Response = "Login Success" , Token = result });
+                if (result != null)
+                {
+                    return Ok(new { Status = true, Response = "Login Success", Token = result });
+                }
+                else
+                {
+                    return Ok(new { Status = false, Response = "Invalid Login", Token = "" });
+                }
+
+                    
             }
             catch (Exception ex)
             {

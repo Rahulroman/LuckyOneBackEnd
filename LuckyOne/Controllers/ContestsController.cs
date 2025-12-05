@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using LuckyOne.DTOs.Contests;
 using LuckyOne.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace LuckyOne.Controllers
             _contestService = contestService; 
         }
 
+        [Authorize]
         [HttpGet("GetAllContests")]
         public async  Task<IActionResult> GetAllContestsAsync()
         {
@@ -27,7 +29,7 @@ namespace LuckyOne.Controllers
 
 
 
-            var contests = _contestService.GetAllContestsAsync();
+            var contests = await _contestService.GetAllContestsAsync();
             return Ok(contests);
         }
 
@@ -40,6 +42,7 @@ namespace LuckyOne.Controllers
             {
                 userId = int.Parse(idClaim);
             }
+
             var contests = await _contestService.GetOpenContestsAsync(userId);
             return Ok(contests);
         }
@@ -65,7 +68,7 @@ namespace LuckyOne.Controllers
         public async Task<IActionResult> CreateContestAsync([FromBody] ContestCreateDto dto)
         {
             var contestId = await _contestService.CreateContestAsync(dto);
-            return CreatedAtAction(nameof(GetContestDetailAsync), new { contestId = contestId }, null);
+            return Ok( new { contestId = contestId , response = "Contest Created" });
         }
 
         [HttpPost("JoinContest/{contestId}")]

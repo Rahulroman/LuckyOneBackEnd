@@ -9,7 +9,13 @@ namespace LuckyOne.Data
         {
         }
 
-        public DbSet<User> Users => Set<User>();
+        public DbSet<User> Users { get; set; }
+        public DbSet<WalletPoints> WalletPoints { get; set; }
+        public DbSet<WalletTransaction> WalletTransactions { get; set; }
+        public DbSet<Contest> Contests { get; set; }
+        public DbSet<ContestUser> ContestUsers { get; set; }
+        public DbSet<ContestPrize> ContestPrizes { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
 
     }

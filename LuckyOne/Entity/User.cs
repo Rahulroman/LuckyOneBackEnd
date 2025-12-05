@@ -11,17 +11,20 @@ namespace LuckyOne.Entity
         public int Id { get; set; }
 
         [MaxLength(100)]
-        public string Username { get; set; } = string.Empty;
+        public string? Username { get; set; } 
 
         [MaxLength(200)]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; }
 
-        public string PasswordHash { get; set; } = string.Empty;
+        public string? PasswordHash { get; set; }
 
-        public string  Mobile { get; set; } = "";
+        public string?  Mobile { get; set; } 
 
-        public bool IsAdmin { get; set; }
+        public bool? IsAdmin { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? CreatedAt { get; set; } 
+
+        public Boolean? IsActive { get; set; }
+
     }
 }

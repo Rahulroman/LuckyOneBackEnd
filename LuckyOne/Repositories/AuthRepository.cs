@@ -35,14 +35,24 @@ namespace LuckyOne.Repositories
             };
         }
 
-        public async Task<object> Login(LoginRequestDto request) 
+        public async Task<string> Login(LoginRequestDto request) 
         {
-            User result  = await _context.Users.Where(x => x.Username == request.Username
+            try
+            {
+ var result  = await _context.Users.Where(x => x.Username == request.Username
                                                 && x.PasswordHash == request.Password)
-                                                .Select(x => x).FirstOrDefaultAsync();
+                                                .Select(x => x.Username).FirstOrDefaultAsync();
+                return result;
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+           
 
 
-            return result;
+            
 
         }
     }
